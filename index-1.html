@@ -1,21 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="JIKZO Creative — AI-powered short-form content, graphics and social media creative.">
-<title>JIKZO Creative | AI Content Studio</title>
-<style>
-:root{--bg:#090b12;--card:#111522;--text:#f5f7ff;--muted:#aab2c5;--accent:#7c5cff;--accent2:#21d4fd;--line:#242a3a}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 80% 10%,#24165d 0,transparent 28%),var(--bg);color:var(--text);line-height:1.6}a{text-decoration:none;color:inherit}.wrap{max-width:1100px;margin:auto;padding:0 22px}nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0}.logo{font-weight:900;font-size:22px}.logo span{color:var(--accent2)}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px}.navlinks a:hover{color:#fff}.hero{padding:85px 0 75px;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}.eyebrow{color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:2px;font-size:13px}h1{font-size:clamp(42px,7vw,76px);line-height:1.02;margin:14px 0 20px}.hero p{font-size:18px;color:var(--muted);max-width:650px}.buttons{display:flex;gap:13px;flex-wrap:wrap;margin-top:28px}.btn{padding:13px 20px;border-radius:12px;font-weight:700;display:inline-block}.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}.secondary{border:1px solid var(--line);background:#0e1220}.visual{min-height:360px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg,#171d32,#0d101a);padding:25px;display:flex;align-items:end;position:relative;overflow:hidden}.visual:before{content:"AI CONTENT";position:absolute;top:30px;right:-35px;transform:rotate(38deg);background:var(--accent);padding:8px 55px;font-weight:900;font-size:12px}.mock{width:100%;border:1px solid #30384e;border-radius:18px;padding:20px;background:#0b0e17}.mock h3{margin:0 0 12px}.bar{height:10px;border-radius:99px;background:#252c40;margin:10px 0}.bar.short{width:60%}.bar.mid{width:78%}section{padding:70px 0}.section-title{font-size:34px;margin:0 0 12px}.lead{color:var(--muted);max-width:680px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}.card{background:rgba(17,21,34,.86);border:1px solid var(--line);border-radius:18px;padding:25px}.icon{font-size:28px}.card h3{margin:10px 0 7px}.card p{color:var(--muted);font-size:15px}.price{font-size:30px;font-weight:900;margin:12px 0}.price small{font-size:13px;color:var(--muted);font-weight:400}.card ul{padding-left:20px;color:var(--muted)}.cta{background:linear-gradient(135deg,#171232,#0f2530);border:1px solid var(--line);border-radius:25px;padding:42px}.contact{display:grid;grid-template-columns:1fr 1fr;gap:22px}.contact-box{background:#0d111c;border:1px solid var(--line);border-radius:18px;padding:24px}.contact-box p{color:var(--muted)}footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:13px}@media(max-width:760px){.hero,.contact{grid-template-columns:1fr}.visual{min-height:280px}.grid{grid-template-columns:1fr}.navlinks{display:none}section{padding:55px 0}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JIKZO Creative | Digital Services</title>
+
+  <meta name="description" content="JIKZO Creative provides affordable digital, creative, gaming and online services.">
+  <meta name="theme-color" content="#111827">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: #111827;
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #263247;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      background:
+        radial-gradient(circle at top, #183b5b 0%, #0b1020 55%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 76px);
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #38bdf8;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: #38bdf8;
+      color: #06111c;
+    }
+
+    .btn-secondary {
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    section {
+      padding: 70px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 40px;
+    }
+
+    .section-title span {
+      color: #38bdf8;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      color: #cbd5e1;
+      font-size: 18px;
+    }
+
+    .services {
+      background: #0f172a;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #111827;
+      border: 1px solid #263247;
+      border-radius: 14px;
+      padding: 28px;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+    }
+
+    .card-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #38bdf8;
+    }
+
+    .card p {
+      color: #cbd5e1;
+    }
+
+    .contact-box {
+      max-width: 700px;
+      margin: auto;
+      background: #111827;
+      border: 1px solid #263247;
+      border-radius: 15px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .contact-box p {
+      color: #cbd5e1;
+      margin: 10px 0;
+    }
+
+    .contact-link {
+      display: block;
+      margin: 15px 0;
+      color: #38bdf8;
+      font-size: 18px;
+      word-break: break-word;
+    }
+
+    footer {
+      background: #070b14;
+      text-align: center;
+      padding: 25px 20px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 650px) {
+      nav {
+        flex-direction: column;
+      }
+
+      nav ul {
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        min-height: 75vh;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header class="wrap"><nav><div class="logo">JIKZO<span>CREATIVE</span></div><div class="navlinks"><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></div></nav></header>
-<main>
-<section class="wrap hero"><div><div class="eyebrow">AI Content Studio</div><h1>Make your brand impossible to ignore.</h1><p>We create short-form videos, social graphics and AI-powered content for creators and small businesses that want to look professional online.</p><div class="buttons"><a class="btn primary" href="#contact">Start a project</a><a class="btn secondary" href="#services">See services</a></div></div><div class="visual"><div class="mock"><h3>Content that gets noticed.</h3><div class="bar"></div><div class="bar mid"></div><div class="bar short"></div><p style="color:#aab2c5">Short videos • Graphics • AI creative</p></div></div></section>
-<section id="services" class="wrap"><h2 class="section-title">What we create</h2><p class="lead">Simple, affordable creative services designed for social media.</p><div class="grid"><article class="card"><div class="icon">🎬</div><h3>Short-form videos</h3><p>TikTok, Reels and YouTube Shorts with hooks, captions and engaging visuals.</p></article><article class="card"><div class="icon">🎨</div><h3>Social graphics</h3><p>Promotional posts, thumbnails, flyers and branded graphics for your online pages.</p></article><article class="card"><div class="icon">🤖</div><h3>AI creative</h3><p>AI-assisted concepts, images, scripts and visual ideas to help you create faster.</p></article></div></section>
-<section id="pricing" class="wrap"><h2 class="section-title">Simple starting prices</h2><p class="lead">Packages can be customized around your content needs.</p><div class="grid"><article class="card"><h3>Starter</h3><div class="price">R99 <small>/ project</small></div><ul><li>1 short video or graphic</li><li>Basic captions</li><li>1 revision</li></ul></article><article class="card"><h3>Creator</h3><div class="price">R299 <small>/ package</small></div><ul><li>3 short-form videos</li><li>Captions + hooks</li><li>2 revisions</li></ul></article><article class="card"><h3>Business</h3><div class="price">Custom</div><ul><li>Multiple content pieces</li><li>Branded creative</li><li>Custom content plan</li></ul></article></div></section>
-<section class="wrap"><div class="cta"><h2 class="section-title">Ready to upgrade your content?</h2><p class="lead">Tell us what you need and we'll discuss the project, price and delivery time.</p><div class="buttons"><a class="btn primary" href="#contact">Contact JIKZO Creative</a></div></div></section>
-<section id="contact" class="wrap"><h2 class="section-title">Let's work together</h2><div class="contact"><div class="contact-box"><h3>Start a project</h3><p>Contact JIKZO Creative to discuss your project.</p><p><strong>Email:</strong> <a href="mailto:jikzob@gmail.com">jikzob@gmail.com</a></p><p><strong>WhatsApp:</strong> <a href="https://wa.me/27810030559">0810030559</a></p></div><div class="contact-box"><h3>What to send</h3><p>Your business name, the service you want, examples you like, and your deadline. We'll take it from there.</p></div></div></section>
-</main><footer><div class="wrap">© 2026 JIKZO Creative. All rights reserved.</div></footer>
-</body></html>
+
+  <header>
+    <nav>
+      <div class="logo">JIKZO Creative</div>
+
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>JIKZO <span>Creative</span></h1>
+
+        <p>
+          Digital creativity, online services, gaming and creative solutions
+          designed to help you build and grow online.
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-primary" href="#services">View Services</a>
+
+          <a
+            class="btn btn-secondary"
+            href="https://wa.me/27810030559"
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp Me
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About <span>JIKZO Creative</span></h2>
+
+        <p class="about">
+          JIKZO Creative is an independent digital creative business focused
+          on helping people and small businesses with online, creative,
+          gaming and digital projects.
+        </p>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+
+        <h2 class="section-title">Our <span>Services</span></h2>
+
+        <div class="service-grid">
+
+          <div class="card">
+            <div class="card-icon">🎨</div>
+            <h3>Graphic Design</h3>
+            <p>
+              Creative designs for social media, brands, posters and online projects.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🎬</div>
+            <h3>Video & Content</h3>
+            <p>
+              Creative video and content ideas for YouTube, TikTok and other platforms.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">🎮</div>
+            <h3>Gaming Content</h3>
+            <p>
+              Gaming-focused creative content, ideas and digital support.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon">💻</div>
+            <h3>Digital Services</h3>
+            <p>
+              Simple digital solutions for individuals, creators and small businesses.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+
+        <h2 class="section-title">Get In <span>Touch</span></h2>
+
+        <div class="contact-box">
+
+          <p>Ready to work together?</p>
+          <p>Contact JIKZO Creative directly.</p>
+
+          <a
+            class="contact-link"
+            href="mailto:jikzob@gmail.com"
+          >
+            📧 jikzob@gmail.com
+          </a>
+
+          <a
+            class="contact-link"
+            href="https://wa.me/27810030559"
+            target="_blank"
+            rel="noopener"
+          >
+            📱 WhatsApp: 0810030559
+          </a>
+
+          <div class="buttons">
+            <a
+              class="btn btn-primary"
+              href="mailto:jikzob@gmail.com"
+            >
+              Send Email
+            </a>
+
+            <a
+              class="btn btn-secondary"
+              href="https://wa.me/27810030559"
+              target="_blank"
+              rel="noopener"
+            >
+              Open WhatsApp
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 JIKZO Creative. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
