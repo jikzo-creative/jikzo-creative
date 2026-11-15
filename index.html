@@ -268,7 +268,6 @@ $("menuBtn").addEventListener("click", () => $("navlinks").classList.toggle("sho
 document.querySelectorAll(".navlinks a").forEach(a => a.addEventListener("click", () => $("navlinks").classList.remove("show")));
 document.querySelectorAll("[data-service]").forEach(a => a.addEventListener("click", () => {$("cservice").value = a.dataset.service;}));
 
-$("contactForm").addEventListener("submit", e => {
 
  const SUPABASE_URL = "https://ylniprnidsrmnicjzayx.supabase.co";
  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-apNA9fIkidukkp4Xz5Anw_aryBl5gI";
@@ -377,7 +376,7 @@ $("contactForm").addEventListener("submit", e => {
  getSupabase().then(client => {
    client.auth.getSession().then(({data}) => showSession(data.session));
    client.auth.onAuthStateChange((_event, session) => showSession(session));
- }).catch(() => { /* Sign-in controls remain responsive and show errors when used. */ });
+ }).catch(() => { /* Authentication errors are shown when a user tries to sign in. */ });
 </script>
 </body>
 </html>
