@@ -256,25 +256,17 @@ section{padding:65px 0}
 </div>
 </div>
 <script>
-
-/* Public frontend credentials only. Never put an sb_secret_ key here. */
-const SUPABASE_URL = "https://ylniprnidsrmnicjzayx.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-apNA9fIkidukkp4Xz5Anw_aryBl5gI";
-
-const $ = id => document.getElementById(id);
-$("year").textContent = new Date().getFullYear();
-
-$("menuBtn").addEventListener("click", () => $("navlinks").classList.toggle("show"));
-document.querySelectorAll(".navlinks a").forEach(a => a.addEventListener("click", () => $("navlinks").classList.remove("show")));
-document.querySelectorAll("[data-service]").forEach(a => a.addEventListener("click", () => {$("cservice").value = a.dataset.service;}));
-
-
  const SUPABASE_URL = "https://ylniprnidsrmnicjzayx.supabase.co";
  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-apNA9fIkidukkp4Xz5Anw_aryBl5gI";
  const $ = id => document.getElementById(id);
  const modal = $("authModal");
  let authMode = "login";
  let supabase = null;
+
+ $("year").textContent = new Date().getFullYear();
+ $("menuBtn").addEventListener("click", () => $("navlinks").classList.toggle("show"));
+ document.querySelectorAll(".navlinks a").forEach(a => a.addEventListener("click", () => $("navlinks").classList.remove("show")));
+ document.querySelectorAll("[data-service]").forEach(a => a.addEventListener("click", () => { $("cservice").value = a.dataset.service; }));
 
  function setStatus(message, isError = false) {
    const node = $("authStatus");
@@ -347,9 +339,7 @@ document.querySelectorAll("[data-service]").forEach(a => a.addEventListener("cli
    if (!email) { setStatus("Enter your email address first.", true); return; }
    try {
      const client = await getSupabase();
-     const { error } = await client.auth.resetPasswordForEmail(email, {
-       redirectTo: location.origin + location.pathname
-     });
+     const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo: location.origin + location.pathname });
      if (error) throw error;
      setStatus("Password reset email sent. Check your inbox.");
    } catch (error) { setStatus(error.message || "Could not send the reset email.", true); }
@@ -376,7 +366,7 @@ document.querySelectorAll("[data-service]").forEach(a => a.addEventListener("cli
  getSupabase().then(client => {
    client.auth.getSession().then(({data}) => showSession(data.session));
    client.auth.onAuthStateChange((_event, session) => showSession(session));
- }).catch(() => { /* Authentication errors are shown when a user tries to sign in. */ });
+ }).catch(() => { /* Errors are shown when a user tries to sign in. */ });
 </script>
 </body>
 </html>
