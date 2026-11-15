@@ -255,8 +255,7 @@ section{padding:65px 0}
 <div id="signedInArea" class="hidden"><p id="signedInText"></p><div class="auth-actions"><button class="btn btn-ghost" id="logoutBtn">Sign out</button></div></div>
 </div>
 </div>
-<script type="module">
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+<script>
 
 /* Public frontend credentials only. Never put an sb_secret_ key here. */
 const SUPABASE_URL = "https://ylniprnidsrmnicjzayx.supabase.co";
@@ -270,4 +269,115 @@ document.querySelectorAll(".navlinks a").forEach(a => a.addEventListener("click"
 document.querySelectorAll("[data-service]").forEach(a => a.addEventListener("click", () => {$("cservice").value = a.dataset.service;}));
 
 $("contactForm").addEventListener("submit", e => {
- e.preventDefault();
+
+ const SUPABASE_URL = "https://ylniprnidsrmnicjzayx.supabase.co";
+ const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-apNA9fIkidukkp4Xz5Anw_aryBl5gI";
+ const $ = id => document.getElementById(id);
+ const modal = $("authModal");
+ let authMode = "login";
+ let supabase = null;
+
+ function setStatus(message, isError = false) {
+   const node = $("authStatus");
+   if (node) { node.textContent = message; node.style.color = isError ? "#ff9b9b" : "#37d5ff"; }
+ }
+ function openAuth() { modal.classList.add("open"); setStatus(""); }
+ function closeAuth() { modal.classList.remove("open"); }
+ function setMode(mode) {
+   authMode = mode;
+   document.querySelectorAll(".auth-tab").forEach(tab => tab.classList.toggle("selected", tab.dataset.mode === mode));
+   $("emailAuthBtn").textContent = mode === "signup" ? "Create account" : "Log in";
+   $("authTitle").textContent = mode === "signup" ? "Create your account" : "Welcome back";
+   $("authSubtitle").textContent = mode === "signup" ? "Join JIKZO Creative." : "Sign in to your JIKZO Creative account.";
+   $("authPassword").autocomplete = mode === "signup" ? "new-password" : "current-password";
+   setStatus("");
+ }
+ async function getSupabase() {
+   if (!supabase) {
+     setStatus("Connecting securely…");
+     const module = await import("https://esm.sh/@supabase/supabase-js@2");
+     supabase = module.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+   }
+   return supabase;
+ }
+ function showSession(session) {
+   const signedIn = !!(session && session.user);
+   $("authFormArea").classList.toggle("hidden", signedIn);
+   $("signedInArea").classList.toggle("hidden", !signedIn);
+   $("accountBtn").textContent = signedIn ? "My account" : "Sign in";
+   if (signedIn) $("signedInText").textContent = "Signed in as " + session.user.email;
+ }
+ $("accountBtn").addEventListener("click", openAuth);
+ $("footerAccount").addEventListener("click", e => { e.preventDefault(); openAuth(); });
+ $("closeModal").addEventListener("click", closeAuth);
+ modal.addEventListener("click", e => { if (e.target === modal) closeAuth(); });
+ document.querySelectorAll(".auth-tab").forEach(tab => tab.addEventListener("click", () => setMode(tab.dataset.mode)));
+ $("emailAuthBtn").addEventListener("click", async () => {
+   const email = $("authEmail").value.trim();
+   const password = $("authPassword").value;
+   if (!email || !password) { setStatus("Enter your email address and password.", true); return; }
+   if (password.length < 6) { setStatus("Your password must be at least 6 characters.", true); return; }
+   try {
+     const client = await getSupabase();
+     setStatus(authMode === "signup" ? "Creating your account…" : "Signing you in…");
+     const result = authMode === "signup"
+       ? await client.auth.signUp({ email, password, options: { emailRedirectTo: location.origin + location.pathname } })
+       : await client.auth.signInWithPassword({ email, password });
+     if (result.error) throw result.error;
+     if (authMode === "signup" && !result.data.session) {
+       setStatus("Account created. Check your email to confirm your address.");
+     } else {
+       showSession(result.data.session);
+       setStatus("You're signed in.");
+     }
+   } catch (error) { setStatus(error.message || "Sign-in failed. Please try again.", true); }
+ });
+ $("googleBtn").addEventListener("click", async () => {
+   try {
+     const client = await getSupabase();
+     setStatus("Opening Google sign-in…");
+     const { error } = await client.auth.signInWithOAuth({
+       provider: "google",
+       options: { redirectTo: location.origin + location.pathname }
+     });
+     if (error) throw error;
+   } catch (error) { setStatus(error.message || "Google sign-in is not configured yet.", true); }
+ });
+ $("forgotBtn").addEventListener("click", async () => {
+   const email = $("authEmail").value.trim();
+   if (!email) { setStatus("Enter your email address first.", true); return; }
+   try {
+     const client = await getSupabase();
+     const { error } = await client.auth.resetPasswordForEmail(email, {
+       redirectTo: location.origin + location.pathname
+     });
+     if (error) throw error;
+     setStatus("Password reset email sent. Check your inbox.");
+   } catch (error) { setStatus(error.message || "Could not send the reset email.", true); }
+ });
+ $("logoutBtn").addEventListener("click", async () => {
+   try {
+     const client = await getSupabase();
+     const { error } = await client.auth.signOut();
+     if (error) throw error;
+     showSession(null);
+     setMode("login");
+     setStatus("You have signed out.");
+   } catch (error) { setStatus(error.message || "Sign-out failed.", true); }
+ });
+ $("contactForm").addEventListener("submit", e => {
+   e.preventDefault();
+   const data = new FormData(e.currentTarget);
+   const subject = encodeURIComponent("JIKZO Creative enquiry: " + (data.get("service") || "General"));
+   const body = encodeURIComponent("Name: " + data.get("name") + "\nEmail: " + data.get("email") + "\nService: " + data.get("service") + "\n\n" + data.get("message"));
+   $("contactStatus").textContent = "Opening your email app…";
+   location.href = "mailto:jikzoboyrsa0@gmail.com?subject=" + subject + "&body=" + body;
+ });
+ setMode("login");
+ getSupabase().then(client => {
+   client.auth.getSession().then(({data}) => showSession(data.session));
+   client.auth.onAuthStateChange((_event, session) => showSession(session));
+ }).catch(() => { /* Sign-in controls remain responsive and show errors when used. */ });
+</script>
+</body>
+</html>
