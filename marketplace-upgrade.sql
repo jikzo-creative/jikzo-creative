@@ -43,6 +43,7 @@ alter table public.services enable row level security;
 revoke all on table public.services from anon, authenticated;
 grant select on table public.services to anon, authenticated;
 grant insert, update, delete on table public.services to authenticated;
+grant usage, select on sequence public.services_id_seq to authenticated;
 drop policy if exists "Public view active services" on public.services;
 create policy "Public view active services" on public.services for select to anon, authenticated
 using (active = true or exists (select 1 from public.user_roles r where r.user_id = (select auth.uid()) and r.role = 'admin'));
